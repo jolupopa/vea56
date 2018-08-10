@@ -1,0 +1,15 @@
+if ($request->hasFile('input_img')) {
+if($request->file('input_img')->isValid()) {
+try {
+$file = $request->file('input_img');
+$name = rand(11111, 99999) . '.' . $file->getClientOriginalExtension();
+
+# save to DB
+$tickes = Users::create(['imagePath' => 'storage/'.$name]);
+
+$request->file('input_img')->move("storage", $name);
+} catch (Illuminate\Filesystem\FileNotFoundException $e) {
+
+}
+}
+}
