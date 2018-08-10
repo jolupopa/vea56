@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ImageController extends Controller {
 	public function index($id) {
 		$product = Product::find($id);
-		$images = $product->images;
+		$images = $product->images()->orderBy('featured', 'desc')->get();
 		return view('admin.products.images.index')->with(compact('product', 'images'));
 	}
 
@@ -56,6 +56,21 @@ class ImageController extends Controller {
 			$productImage->delete();
 
 		}
+		return back();
+
+	}
+
+	public function select($id, $image) {
+
+		// borramos las destacadas
+		ProductImage::where('product_id', $id)->update([
+			'featured' => false,
+		]);
+		// marcamos la destacada
+		$productImage = ProductImage::find($image);
+		$productImage->featured = true;
+		$productImage->save();
+
 		return back();
 
 	}

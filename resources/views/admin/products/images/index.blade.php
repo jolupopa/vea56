@@ -32,7 +32,7 @@
 				@foreach($images as $image)
 				<div class="col-md-4">
 					<div class="card" style="width: 20rem;">
-						<img class="card-img-top" src="{{ $image->image }}" alt="Card image cap">
+						<img class="card-img-top" src="{{ $image->url }}" alt="Card image cap">
 						<div class="card-body">
 							<p class="card-text">Some {{ $image->id }} quick example text to build on the card title and make up the bulk of the card's content.</p>
 						</div>
@@ -43,6 +43,12 @@
 							{{-- equivalente al method_field(DELETE) = <input type="hidden" name="_method" value="DELETE"> --}}
 							<input type="hidden" name="image_id" value="{{ $image->id }}">
 							<button type="submit" rel="tooltip" title="Eliminar" class="text-danger float-right"><i class="fa fa-times"></i></button>
+							@if($image->featured)
+							<a href="{{ '/admin/products/'.$product->id.'/images/select/'.$image->id }}" rel="tooltip" title="Destacada" class=" btn btn-primary btn-fab btn-fab-mini btn-round text-warning float-left"><i class="fa fa-star" aria-hidden="true"></i></a>
+
+							@else
+							<a href="{{ '/admin/products/'.$product->id.'/images/select/'.$image->id }}" rel="tooltip" title="Destacar" class=" btn btn-primary btn-fab btn-fab-mini btn-round text-warning float-left"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+							@endif
 						</form>
 
 					</div>

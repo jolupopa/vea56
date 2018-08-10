@@ -13,7 +13,7 @@ class ProductImage extends Model {
 
 	//accesor
 	public function getUrlAttribute() {
-		if (substr($this->image, 0, 4) === 'htpp') {
+		if (substr($this->image, 0, 4) === 'http') {
 			return $this->image;
 		}
 

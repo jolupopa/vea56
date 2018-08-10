@@ -16,18 +16,20 @@ class Product extends Model {
 		return $this->hasMany(ProductImage::class);
 	}
 
-	public function getFeaturedImageAttribute() {
+	public function getFeaturedImageUrlAttribute() {
+
+		//$users = App\User::where('active', 1)->get();
 
 		$featuredImage = $this->images()->where('featured', true)->first();
 
 		if (!$featuredImage) {
 
-			$featuredImage = $this->images()->first();
-			//dd('primera imagen encontrada');
+			$featuredImage = $this->images->first();
+			//dd($featuredImage);
 		}
 
 		if ($featuredImage) {
-			//dd('mostramos la destacada');
+			//dd('mostramos imagen destacada');
 			return $featuredImage->url;
 		}
 
