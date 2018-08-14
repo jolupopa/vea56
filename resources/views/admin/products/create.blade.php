@@ -28,28 +28,46 @@
           <div class="col-sm-6">
             <div class="form-group label-floating">
               <label class="control-label">Nombre del producto</label>
-              <input type="text"  class="form-control" name="name">
+              <input type="text"  class="form-control" name="name" value="{{old('name')}}">
             </div>
           </div>
 
           <div class="col-sm-6">
             <div class="form-group label-floating">
               <label class="control-label">Precio del Producto</label>
-              <input type="number" step="0.01" class="form-control" name="price">
+              <input type="number" step="0.01" class="form-control" name="price" value="{{ old('price')}}">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group label-floating">
+              <label class="control-label">Descripcion corta</label>
+              <input type="text"  class="form-control" name="description" value="{{ old('description')}}">
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group label-floating">
+              <label class="control-label" >Seleccione la Categoria del Producto</label>
+              <select class="form-control" name="category_id">
+                <option value="0">General</option>
+                @foreach ($categories as $category)
+                <option value="{{ $category->id}}">{{ $category->name}} </option>
+                @endforeach
+
+              </select>
             </div>
           </div>
         </div>
 
-        <div class="form-group label-floating">
-          <label class="control-label">Descripcion corta</label>
-          <input type="text"  class="form-control" name="description">
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Descripcion del producto</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1"  rows="5" name="long_description"></textarea>
         </div>
-
-
-
-        <textarea class="form-control" placeholder="Descripcion del producto" rows="5" name="long_description"></textarea>
-
         <button class="btn btn-primary">Registrar Producto</button>
+        <a href="{{ url('/admin/products') }}"" class="btn btn-default">Cancelar</a>
 
 
 

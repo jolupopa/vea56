@@ -6,5 +6,6 @@ $factory->define(App\Category::class, function (Faker $faker) {
 	return [
 		'name' => ucfirst($faker->word),
 		'description' => $faker->sentence(8),
+		'image' => 'https://placeimg.com/250/250/arch',
 	];
 });

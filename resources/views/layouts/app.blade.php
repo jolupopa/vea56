@@ -9,7 +9,10 @@
   <title>@yield('title', 'VeaInmuebles')</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  {{--  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /> --}}
+
+  <link href="{{ asset('css/fonts.googleapis.com_css family=Roboto 300,400,500,700 Roboto+Slab 400,700 Material+Icons.css') }}" rel="stylesheet" />
+
 
   <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" />
 
@@ -18,6 +21,7 @@
   <!-- CSS Just for demo purpose, don't include it in your project
     <link href="../assets/demo/demo.css" rel="stylesheet"
     clases del body login-page sidebar-collapse     /> -->
+    @yield('styles')
   </head>
 
   <body class="@yield('body-class')">
@@ -54,46 +58,52 @@
               {{ Auth::user()->name }} <span class="caret"></span>
             </a>
 
+
+
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
+             <a class="dropdown-item" href="{{ url('/home')}}">Dashboard</a>
 
-              <a class="dropdown-item" href="{{ url('/admin/products')}}">Gestionar Productos</a>
+             @if(auth()->user()->admin)
+             <a class="dropdown-item" href="{{ url('/admin/products')}}">Gestionar Productos</a>
+             <a class="dropdown-item" href="{{ url('/admin/categories')}}">Gestionar Categorias</a>
+             @endif
 
-              <div class="dropdown-divider"></div>
-
-
-              <a class="dropdown-item" href="{{ route('logout') }}"
-              onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">
-              {{ __('Logout') }}
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
+             <div class="dropdown-divider"></div>
 
 
-          </div>
-        </li>
-        @endguest
-        <li class="nav-item">
-          <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
-            <i class="fa fa-twitter"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
-            <i class="fa fa-facebook-square"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+             <a class="dropdown-item" href="{{ route('logout') }}"
+             onclick="event.preventDefault();
+             document.getElementById('logout-form').submit();">
+             {{ __('cerrar sesión') }}
+           </a>
+
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+
+
+        </div>
+      </li>
+      @endguest
+      <li class="nav-item">
+        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
+          <i class="fa fa-facebook-square"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </li>
+    </ul>
   </div>
+</div>
 </nav>
 <div id="wrapper">
   @yield('content')

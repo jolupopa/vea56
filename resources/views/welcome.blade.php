@@ -4,6 +4,12 @@
 
 @section('body-class', 'landing-page sidebar-collapse')
 
+@section('styles')
+<style>
+
+</style>
+
+@endsection
 @section('content')
 <div class="page-header header-filter" data-parallax="true" style="background-image: url('{{ asset('img/profile_city.jpg') }}')">
   <div class="container">
@@ -61,78 +67,79 @@
       </div>
     </div>
     <div class="section text-center">
-      <h2 class="title">Nuestros Productos</h2>
+      <h2 class="title">Visita nuestras Categorias</h2>
+
+      <form method="get"  action="{{ url('/search') }}" class="d-flex justify-content-center">
+        <input type="text"  placeholder="¿Que producto Buscas?" class="form-control" name="query">
+        <button class="btn btn-primary ">
+          <i class="material-icons">search</i>
+        </button>
+      </form>
+
       <div class="team">
         <div class="row">
-          @foreach ($products as $product)
+          @foreach ($categories as $category)
           <div class="col-md-4">
             <div class="team-player">
-              <div class="card card-plain">
+             {{--  card --}}
+             <div class="card">
+              <div class="card-header">
+                <h4 class="card-title"><a href="{{ url('/categories/'.$category->id) }}">{{ $category->name }}</a></h4>
+
+              </div>
+              <div class="card-body">
                 <div class="col-md-6 ml-auto mr-auto">
-
-                  {{-- {{ $product->images()->first()->image }} --}}
-
-                  <img src="{{ $product->featured_image_url }}" alt="Thumbnail Image"
+                  <img src="{{ $category->image }}" alt="Thumbnail Image"
                   class="img-raised rounded-circle img-fluid">
                 </div>
-                {{--  || $product->featured_image --}}
-                <h4 class="card-title">{{ $product->name }}
-                  <br>
-                  <small class="card-description text-muted">{{ $product->category['name'] }}</small>
-                </h4>
-                <div class="card-body">
-                  <p class="card-description">{{ $product->description }}</p>
-                </div>
-                <div class="card-footer justify-content-center">
-                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
-                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
-                  <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
-                </div>
+                <p class="card-description">{{ $category->description }}</p>
+
+              </div>
+
+            </div>{{--  card --}}
+          </div>
+        </div>
+        @endforeach
+      </div>
+
+    </div>
+  </div>
+  <div class="section section-contacts">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto">
+        <h2 class="text-center title">Work with us</h2>
+        <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
+        <form class="contact-form">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Your Name</label>
+                <input type="email" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Your Email</label>
+                <input type="email" class="form-control">
               </div>
             </div>
           </div>
-          @endforeach
-
-
-        </div>
-      </div>
-    </div>
-    <div class="section section-contacts">
-      <div class="row">
-        <div class="col-md-8 ml-auto mr-auto">
-          <h2 class="text-center title">Work with us</h2>
-          <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-          <form class="contact-form">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Your Name</label>
-                  <input type="email" class="form-control">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Your Email</label>
-                  <input type="email" class="form-control">
-                </div>
-              </div>
+          <div class="form-group">
+            <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
+            <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
+          </div>
+          <div class="row">
+            <div class="col-md-4 ml-auto mr-auto text-center">
+              <button class="btn btn-primary btn-raised">
+                Send Message
+              </button>
             </div>
-            <div class="form-group">
-              <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
-              <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
-            </div>
-            <div class="row">
-              <div class="col-md-4 ml-auto mr-auto text-center">
-                <button class="btn btn-primary btn-raised">
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 

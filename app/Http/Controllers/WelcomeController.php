@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Product;
+use App\Category;
 
 class WelcomeController extends Controller {
 	public function index() {
 
-		$products = Product::with('images')->get();
+		$categories = Category::has('products')->get();
 
-		return view('welcome')->with(compact('products'));
+		return view('welcome')->with(compact('categories'));
 	}
 }

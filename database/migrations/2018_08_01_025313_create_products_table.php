@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration {
 
 			//FK
 			$table->integer('category_id')->unsigned()->nullable();
-			$table->foreign('category_id')->references('id')->on('categories');
+			$table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
 
 			$table->timestamps();
 		});

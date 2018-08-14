@@ -13,9 +13,9 @@ class ProductsTableSeeder extends Seeder {
 			factory(App\Product::class, 100)->create();
 		*/
 
-		$categories = factory(App\Category::class, 3)->create();
+		$categories = factory(App\Category::class, 5)->create();
 		$categories->each(function ($category) {
-			$products = factory(App\Product::class, 10)->make();
+			$products = factory(App\Product::class, 15)->make();
 			$category->products()->saveMany($products);
 
 			$products->each(function ($p) {
